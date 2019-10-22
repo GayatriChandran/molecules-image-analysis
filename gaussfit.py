@@ -24,7 +24,7 @@ def fitAFunctionLS(data, params, fn):
     err = errorfunction(result)
     err = scipy.sum(err * err)
     if (success < 1) or (success > 4):
-        print("Fitting problem!", success, mesg)
+        # print("Fitting problem!", success, mesg)
         good = False
     return [result, good]
 

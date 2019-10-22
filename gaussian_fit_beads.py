@@ -43,5 +43,5 @@ if (__name__ == "__main__"):
             else:
                 molecules.loc[k] = [numpy.NaN, numpy.NaN]
                 k+=1
-
+        
         molecules.to_csv(output_directory + "molecules_" + index + ".csv", header=['x','y'],index=False)

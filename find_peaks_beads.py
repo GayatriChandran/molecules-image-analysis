@@ -25,6 +25,8 @@ if (__name__ == "__main__"):
 
     dax_files = sorted(glob.glob('D:/gayatri-folder/old-blinking-experiments/1-31-Aug-2019-Beads/beads_647_*.dax'))
     output_directory = 'D:/gayatri-folder/old-blinking-experiments/1-31-Aug-2019-Beads/image-analysis/'
+    stats = pd.DataFrame([], columns=['AVG'])
+    k=0
     for movie_file in dax_files:
         # print(movie_file)
         # Load first frame of movie, using command : python find_peaks_beads.py D:\gayatri-folder\old-blinking-experiments\1-31-Aug-2019-Beads\beads_647_0001.dax
@@ -59,8 +61,11 @@ if (__name__ == "__main__"):
         # print("Mean peak intensity = ", mean_peak)
         median_peak = df['avg'].median()
         # print("Median peak intensity = ", median_peak)
-        info= open(output_directory + "info_" + index + ".txt","w+")
-        info.write('Average molecule intensity :' + str(mean_peak))
-        info.write('\n')
-        info.write('Median : ' + str(median_peak))
-        info.close()
+        stats.loc[k] = [numpy.around(median_peak, decimals=3)]
+        k+=1
+        # info= open(output_directory + "info_" + index + ".txt","w+")
+        # info.write('Average molecule intensity :' + str(mean_peak))
+        # info.write('\n')
+        # info.write('Median : ' + str(median_peak))
+        # info.close()
+    stats.to_csv(output_directory + "stats.csv", header=['AVG'],index=False)
